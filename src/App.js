@@ -1,23 +1,19 @@
-import logo from './logo.svg';
+import { useEffect, useState } from 'react';
 import './App.css';
+import Home from './components/Home/Home';
 
 function App() {
+  const [peoples, setPeoples] = useState([]);
+
+  useEffect( () =>{
+    fetch('https://swapi.dev/api/people')
+    .then(res => res.jason())
+    .then(data => setPeoples(data))
+  } ,[]);
+  console.log(peoples);
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Home></Home>
     </div>
   );
 }
